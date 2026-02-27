@@ -14,23 +14,19 @@
             pt: {
                 title: "Master QBR Dashboard",
                 subtitle: "Visão 360º: Estratégia, Prospecção, Receita e Capacitação",
-                exportBtn: "Exportar QBR Completa (CSV)",
+                exportBtn: "Exportar QBR Completa",
                 sec1Title: "1. Objetivos Conjuntos (Estratégia)",
                 sec2Title: "2. Clientes Target (Prospecção)",
                 sec3Title: "3. Pipeline Avançado (Colocation + Serviços)",
                 sec4Title: "4. Passaporte NextStream (Treinamentos NPP)",
-                // Labels Gerais
                 partnerPh: "Nome do Integrador",
                 amPh: "Account Manager NextStream",
                 addBtn: "Adicionar",
-                // Sec 1
                 objDescPh: "Descrição do Objetivo",
                 objOwnerPh: "Responsável",
                 objObsPh: "Observações",
-                // Sec 2
                 tgtClientPh: "Cliente Alvo",
                 tgtActionPh: "Ação Mapeada (Ex: Visita IC²)",
-                // Sec 3 (Pipeline)
                 clientLbl: "Cliente Final",
                 termLbl: "Contrato (Meses)",
                 racksLbl: "Racks",
@@ -40,13 +36,12 @@
                 shLbl: "Smart Hands",
                 tcvTotal: "TCV Total",
                 comTotal: "Comissões Projetadas",
-                // Sec 4
                 trnPersonPh: "Nome do Colaborador (Canal)"
             },
             es: {
                 title: "Master QBR Dashboard",
                 subtitle: "Visión 360º: Estrategia, Prospección, Ingresos y Capacitación",
-                exportBtn: "Exportar QBR Completa (CSV)",
+                exportBtn: "Exportar QBR Completa",
                 sec1Title: "1. Objetivos Conjuntos (Estrategia)",
                 sec2Title: "2. Clientes Target (Prospección)",
                 sec3Title: "3. Pipeline Avanzado (Colocation + Servicios)",
@@ -73,7 +68,7 @@
             en: {
                 title: "Master QBR Dashboard",
                 subtitle: "360º View: Strategy, Target, Revenue & Enablement",
-                exportBtn: "Export Full QBR (CSV)",
+                exportBtn: "Export Full QBR",
                 sec1Title: "1. Joint Objectives (Strategy)",
                 sec2Title: "2. Target Clients (Go-to-Market)",
                 sec3Title: "3. Advanced Pipeline (Colocation + Services)",
@@ -107,14 +102,16 @@
                 <h1 class="text-2xl font-bold">NextStream | <span class="text-blue-400 font-normal" data-i18n="title">Master QBR Dashboard</span></h1>
                 <p class="text-sm text-slate-400 mt-1" data-i18n="subtitle">Visão 360º: Estratégia, Prospecção, Receita e Capacitação</p>
             </div>
-            <div class="flex items-center space-x-4">
-                <select id="langSelector" onchange="changeLanguage(this.value)" class="bg-slate-800 text-white border border-slate-600 rounded p-2 text-sm focus:outline-none">
-                    <option value="pt">🇧🇷 Português</option>
-                    <option value="es">🇲🇽 Español</option>
-                    <option value="en">🇺🇸 English</option>
-                </select>
-                <button onclick="exportAllToCSV()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded text-sm font-bold shadow transition flex items-center">
-                    <i class="fas fa-file-export mr-2"></i><span data-i18n="exportBtn">Exportar QBR Completa (CSV)</span>
+            
+            <div class="flex items-center space-x-6">
+                <div class="flex bg-slate-800 p-1 rounded-md border border-slate-700 shadow-inner">
+                    <button id="btn-pt" onclick="changeLanguage('pt')" class="lang-btn px-3 py-1.5 rounded text-sm font-bold transition-all duration-200 bg-slate-600 text-white shadow">🇧🇷 PT</button>
+                    <button id="btn-es" onclick="changeLanguage('es')" class="lang-btn px-3 py-1.5 rounded text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-700">🇲🇽 ES</button>
+                    <button id="btn-en" onclick="changeLanguage('en')" class="lang-btn px-3 py-1.5 rounded text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-700">🇺🇸 EN</button>
+                </div>
+
+                <button onclick="exportAllToCSV()" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2.5 rounded-md text-sm font-bold shadow-md transition flex items-center">
+                    <i class="fas fa-file-export mr-2"></i><span data-i18n="exportBtn">Exportar QBR Completa</span>
                 </button>
             </div>
         </div>
@@ -244,15 +241,37 @@
     </main>
 
     <script>
-        // --- Motor i18n ---
+        // --- Motor i18n e Controle Visual dos Botões ---
         function changeLanguage(lang) {
             currentLang = lang;
             const dict = i18n[lang];
+            
+            // Tradução de Textos e Placeholders
             document.querySelectorAll('[data-i18n]').forEach(el => { el.innerText = dict[el.getAttribute('data-i18n')]; });
             document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = dict[el.getAttribute('data-i18n-ph')]; });
-            renderProject(); 
+            
+            // Lógica Visual dos Botões (Ativo vs Inativo)
+            const btns = ['pt', 'es', 'en'];
+            btns.forEach(b => {
+                const btnEl = document.getElementById(`btn-${b}`);
+                if(b === lang) {
+                    // Estado Ativo
+                    btnEl.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-700', 'font-medium');
+                    btnEl.classList.add('bg-slate-600', 'text-white', 'shadow', 'font-bold');
+                } else {
+                    // Estado Inativo
+                    btnEl.classList.remove('bg-slate-600', 'text-white', 'shadow', 'font-bold');
+                    btnEl.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-700', 'font-medium');
+                }
+            });
+
+            renderProject(); // Re-renderiza para ajustar os prefixos de moeda
         }
-        document.addEventListener('DOMContentLoaded', () => { changeLanguage('pt'); document.getElementById('qbrDate').valueAsDate = new Date(); });
+        
+        document.addEventListener('DOMContentLoaded', () => { 
+            changeLanguage('pt'); 
+            document.getElementById('qbrDate').valueAsDate = new Date(); 
+        });
 
         // --- Dados (Memória da Sessão) ---
         const qbrData = { objetivos: [], targets: [], projetos: [], treinamentos: [] };
@@ -322,7 +341,7 @@
         function renderProject() {
             const tbody = document.getElementById('tableProject'); tbody.innerHTML = '';
             let sumTcv = 0; let sumCom = 0;
-            const curr = currentLang === 'en' ? '$' : 'R$';
+            const curr = currentLang === 'en' ? '$' : (currentLang === 'es' ? '$' : 'R$');
 
             qbrData.projetos.forEach((item, index) => {
                 sumTcv += item.tcv; sumCom += item.comValor;
@@ -330,7 +349,7 @@
                     <td class="p-3"><span class="font-bold">${item.client}</span><br><span class="text-xs text-slate-500">${item.term}m | ${item.racks} Racks | ${item.totalKva} kVA | Set:${item.setup} | Mov:${item.moving} | SH:${item.smartHands}/m</span></td>
                     <td class="p-3 text-right font-black text-slate-800">${item.tcv.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
                     <td class="p-3 text-right"><span class="font-black text-green-600">${item.comValor.toLocaleString('en-US', {minimumFractionDigits:2})}</span> <span class="text-xs text-slate-400">(${item.comPerc}%)</span></td>
-                    <td class="p-3 text-center"><button onclick="removeRow(${index}, qbrData.projetos, renderProject)" class="text-red-400"><i class="fas fa-trash"></i></button></td></tr>`;
+                    <td class="p-3 text-center"><button onclick="removeRow(${index}, qbrData.projetos, renderProject)" class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button></td></tr>`;
             });
             document.getElementById('totalTcvView').innerText = `${curr} ${sumTcv.toLocaleString('en-US', {minimumFractionDigits:2})}`;
             document.getElementById('totalComView').innerText = `${curr} ${sumCom.toLocaleString('en-US', {minimumFractionDigits:2})}`;
