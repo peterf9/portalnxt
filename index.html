@@ -33,7 +33,8 @@
                 kvaLbl: "kVA/Rack",
                 setupLbl: "Setup (R$)",
                 movLbl: "Moving (R$)",
-                shLbl: "Smart Hands",
+                shLbl: "Incluir Smart Hands",
+                dcLbl: "Data Centers do Projeto (Múltipla Escolha)",
                 tcvTotal: "TCV Total",
                 comTotal: "Comissões Projetadas",
                 trnPersonPh: "Nome do Colaborador (Canal)"
@@ -60,7 +61,8 @@
                 kvaLbl: "kVA/Rack",
                 setupLbl: "Setup ($)",
                 movLbl: "Moving ($)",
-                shLbl: "Smart Hands",
+                shLbl: "Incluir Smart Hands",
+                dcLbl: "Data Centers del Proyecto (Selección Múltiple)",
                 tcvTotal: "TCV Total",
                 comTotal: "Comisiones Proyectadas",
                 trnPersonPh: "Nombre del Colaborador (Canal)"
@@ -87,7 +89,8 @@
                 kvaLbl: "kVA/Rack",
                 setupLbl: "Setup ($)",
                 movLbl: "Moving ($)",
-                shLbl: "Smart Hands",
+                shLbl: "Include Smart Hands",
+                dcLbl: "Project Data Centers (Multi-Select)",
                 tcvTotal: "Total TCV",
                 comTotal: "Projected Commissions",
                 trnPersonPh: "Employee Name (Partner)"
@@ -106,7 +109,7 @@
             <div class="flex items-center space-x-6">
                 <div class="flex bg-slate-800 p-1 rounded-md border border-slate-700 shadow-inner">
                     <button id="btn-pt" onclick="changeLanguage('pt')" class="lang-btn px-3 py-1.5 rounded text-sm font-bold transition-all duration-200 bg-slate-600 text-white shadow">🇧🇷 PT</button>
-                    <button id="btn-es" onclick="changeLanguage('es')" class="lang-btn px-3 py-1.5 rounded text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-700">🇲🇽 ES</button>
+                    <button id="btn-es" onclick="changeLanguage('es')" class="lang-btn px-3 py-1.5 rounded text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-700">🇪🇸 ES</button>
                     <button id="btn-en" onclick="changeLanguage('en')" class="lang-btn px-3 py-1.5 rounded text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-700">🇺🇸 EN</button>
                 </div>
 
@@ -158,30 +161,50 @@
         <section class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-orange-500">
             <h2 class="text-lg font-bold text-slate-800 mb-2"><i class="fas fa-server text-orange-500 mr-2"></i><span data-i18n="sec3Title">3. Pipeline Avançado (Colocation + Serviços)</span></h2>
             
-            <form id="formProject" class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
-                <div class="col-span-1 md:col-span-2">
-                    <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="clientLbl">Cliente Final</label>
-                    <input type="text" id="projClient" required class="w-full rounded border-slate-300 p-2 border text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="termLbl">Contrato (Meses)</label>
-                    <select id="projTerm" required class="w-full rounded border-slate-300 p-2 border text-sm font-bold text-blue-700">
-                        <option value="24">24 (5%)</option>
-                        <option value="36">36 (7%)</option>
-                        <option value="48">48 (8.5%)</option>
-                        <option value="60">60 (10%)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="racksLbl">Racks</label>
-                    <input type="number" id="projRacks" required min="1" class="w-full rounded border-slate-300 p-2 border text-sm" value="1">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="kvaLbl">kVA/Rack</label>
-                    <input type="number" id="projKva" required min="1" step="0.5" class="w-full rounded border-slate-300 p-2 border text-sm">
+            <form id="formProject" class="mb-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="clientLbl">Cliente Final</label>
+                        <input type="text" id="projClient" required class="w-full rounded border-slate-300 p-2 border text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="termLbl">Contrato (Meses)</label>
+                        <select id="projTerm" required class="w-full rounded border-slate-300 p-2 border text-sm font-bold text-blue-700">
+                            <option value="24">24 (5%)</option>
+                            <option value="36">36 (7%)</option>
+                            <option value="48">48 (8.5%)</option>
+                            <option value="60">60 (10%)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="racksLbl">Racks</label>
+                        <input type="number" id="projRacks" required min="1" class="w-full rounded border-slate-300 p-2 border text-sm" value="1">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="kvaLbl">kVA/Rack</label>
+                        <input type="number" id="projKva" required min="1" step="0.5" class="w-full rounded border-slate-300 p-2 border text-sm">
+                    </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-4 grid grid-cols-3 gap-3 border-t border-slate-200 pt-3 mt-1">
+                <div class="mt-4 border-t border-slate-200 pt-3">
+                    <label class="block text-xs font-bold text-slate-700 mb-2" data-i18n="dcLbl">Data Centers do Projeto (Múltipla Escolha)</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 text-xs text-slate-700">
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Tamboré (BR)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Tamboré (BR)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Curitiba (BR)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Curitiba (BR)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Ixtlahuaca (MX)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Ixtlahuaca (MX)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Barracas (AR)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Barracas (AR)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Velez (AR)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Velez (AR)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Lince (PE)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Lince (PE)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Monterico (PE)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Monterico (PE)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Paine 1 (CL)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Paine 1 (CL)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Paine 2 (CL)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Paine 2 (CL)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="Apoquindo (CL)" class="rounded text-blue-600 focus:ring-blue-500"> <span>Apoquindo (CL)</span></label>
+                        <label class="flex items-center space-x-1 cursor-pointer hover:text-blue-600"><input type="checkbox" name="projDc" value="San Martin (CL)" class="rounded text-blue-600 focus:ring-blue-500"> <span>San Martin (CL)</span></label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 border-t border-slate-200 pt-3 mt-3 items-end">
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="setupLbl">Setup</label>
                         <input type="number" id="projSetup" class="w-full rounded border-slate-300 p-2 border text-sm" placeholder="R$ 25k/rack padrao">
@@ -190,16 +213,19 @@
                         <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="movLbl">Moving</label>
                         <input type="number" id="projMoving" class="w-full rounded border-slate-300 p-2 border text-sm">
                     </div>
+                    <div class="pb-2">
+                        <label class="flex items-center space-x-2 cursor-pointer bg-white p-2 border border-slate-300 rounded shadow-sm hover:bg-slate-50">
+                            <input type="checkbox" id="projSmartHands" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            <span class="text-xs font-bold text-slate-700" data-i18n="shLbl">Incluir Smart Hands</span>
+                        </label>
+                    </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="shLbl">Smart Hands (/mês)</label>
-                        <input type="number" id="projSmartHands" class="w-full rounded border-slate-300 p-2 border text-sm">
+                        <button type="submit" class="w-full bg-slate-900 text-white font-bold px-4 py-2 rounded hover:bg-slate-800 transition shadow-sm"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
-                
-                <div class="col-span-1 border-t border-slate-200 pt-3 mt-1 flex items-end">
-                    <button type="submit" class="w-full bg-slate-900 text-white font-bold px-4 py-2 rounded hover:bg-slate-800 transition shadow-sm"><i class="fas fa-plus"></i></button>
-                </div>
+
             </form>
+            
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-slate-500">
                     <thead class="text-xs text-slate-700 uppercase bg-slate-100">
@@ -208,6 +234,7 @@
                     <tbody id="tableProject"></tbody>
                 </table>
             </div>
+            
             <div class="mt-4 p-4 bg-slate-50 border border-slate-200 rounded-lg flex justify-end space-x-8">
                 <div class="text-right">
                     <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="tcvTotal">TCV Total</p>
@@ -246,26 +273,22 @@
             currentLang = lang;
             const dict = i18n[lang];
             
-            // Tradução de Textos e Placeholders
             document.querySelectorAll('[data-i18n]').forEach(el => { el.innerText = dict[el.getAttribute('data-i18n')]; });
             document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = dict[el.getAttribute('data-i18n-ph')]; });
             
-            // Lógica Visual dos Botões (Ativo vs Inativo)
             const btns = ['pt', 'es', 'en'];
             btns.forEach(b => {
                 const btnEl = document.getElementById(`btn-${b}`);
                 if(b === lang) {
-                    // Estado Ativo
                     btnEl.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-700', 'font-medium');
                     btnEl.classList.add('bg-slate-600', 'text-white', 'shadow', 'font-bold');
                 } else {
-                    // Estado Inativo
                     btnEl.classList.remove('bg-slate-600', 'text-white', 'shadow', 'font-bold');
                     btnEl.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-700', 'font-medium');
                 }
             });
 
-            renderProject(); // Re-renderiza para ajustar os prefixos de moeda
+            renderProject(); 
         }
         
         document.addEventListener('DOMContentLoaded', () => { 
@@ -277,7 +300,6 @@
         const qbrData = { objetivos: [], targets: [], projetos: [], treinamentos: [] };
         const VALOR_KVA = 1100;
 
-        // Funções Genéricas
         function addRow(e, formId, dataArray, dataObj, renderFunc) {
             e.preventDefault(); dataArray.push(dataObj); document.getElementById(formId).reset(); renderFunc();
         }
@@ -322,10 +344,20 @@
             const setupInput = document.getElementById('projSetup').value;
             const setup = setupInput !== "" ? parseFloat(setupInput) : (racks * 25000); 
             const moving = parseFloat(document.getElementById('projMoving').value) || 0;
-            const smartHands = parseFloat(document.getElementById('projSmartHands').value) || 0;
+            
+            // Captura de Smart Hands (Boolean)
+            const hasSmartHands = document.getElementById('projSmartHands').checked;
+            const strSmartHands = hasSmartHands ? 'Sim' : 'Não';
+
+            // Captura dos Data Centers Selecionados
+            let selectedDCs = [];
+            document.querySelectorAll('input[name="projDc"]:checked').forEach(cb => {
+                selectedDCs.push(cb.value);
+            });
+            const dcs = selectedDCs.length > 0 ? selectedDCs.join(', ') : 'Não definido';
 
             const totalKva = racks * kva;
-            const mrr = (totalKva * VALOR_KVA) + smartHands;
+            const mrr = (totalKva * VALOR_KVA); // Removido o Smart Hands numérico do cálculo do TCV
             const tcv = (mrr * term) + setup + moving;
 
             let comPerc = 0.05;
@@ -333,11 +365,20 @@
             if (term === 48) comPerc = 0.085;
             if (term >= 60) comPerc = 0.10;
 
-            qbrData.projetos.push({ client: document.getElementById('projClient').value, term, racks, kva, totalKva, setup, moving, smartHands, tcv, comPerc: comPerc*100, comValor: tcv*comPerc });
+            qbrData.projetos.push({ 
+                client: document.getElementById('projClient').value, 
+                term, racks, kva, totalKva, setup, moving, 
+                smartHands: strSmartHands, dcs: dcs, 
+                tcv, comPerc: comPerc*100, comValor: tcv*comPerc 
+            });
+            
+            // Limpa form mas mantém configurações padrão
             document.getElementById('formProject').reset();
-            document.getElementById('projTerm').value = "24"; document.getElementById('projRacks').value = "1";
+            document.getElementById('projTerm').value = "24"; 
+            document.getElementById('projRacks').value = "1";
             renderProject();
         });
+
         function renderProject() {
             const tbody = document.getElementById('tableProject'); tbody.innerHTML = '';
             let sumTcv = 0; let sumCom = 0;
@@ -345,11 +386,24 @@
 
             qbrData.projetos.forEach((item, index) => {
                 sumTcv += item.tcv; sumCom += item.comValor;
+                
+                // Formatação visual da Badge de Smart Hands
+                let badgeSH = item.smartHands === 'Sim' ? `<span class="bg-blue-100 text-blue-800 px-1 rounded font-bold">SH: Sim</span>` : `<span class="text-slate-400">SH: Não</span>`;
+
                 tbody.innerHTML += `<tr class="border-b hover:bg-white transition">
-                    <td class="p-3"><span class="font-bold">${item.client}</span><br><span class="text-xs text-slate-500">${item.term}m | ${item.racks} Racks | ${item.totalKva} kVA | Set:${item.setup} | Mov:${item.moving} | SH:${item.smartHands}/m</span></td>
+                    <td class="p-3">
+                        <span class="font-bold text-slate-900">${item.client}</span> 
+                        <span class="ml-2 text-xs font-semibold text-orange-600"><i class="fas fa-map-marker-alt"></i> ${item.dcs}</span>
+                        <br>
+                        <span class="text-xs text-slate-500">${item.term}m | ${item.racks} Racks | ${item.totalKva} kVA | Set:${item.setup.toLocaleString()} | Mov:${item.moving.toLocaleString()} | ${badgeSH}</span>
+                    </td>
                     <td class="p-3 text-right font-black text-slate-800">${item.tcv.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
-                    <td class="p-3 text-right"><span class="font-black text-green-600">${item.comValor.toLocaleString('en-US', {minimumFractionDigits:2})}</span> <span class="text-xs text-slate-400">(${item.comPerc}%)</span></td>
-                    <td class="p-3 text-center"><button onclick="removeRow(${index}, qbrData.projetos, renderProject)" class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button></td></tr>`;
+                    <td class="p-3 text-right">
+                        <span class="font-black text-green-600">${item.comValor.toLocaleString('en-US', {minimumFractionDigits:2})}</span> 
+                        <span class="text-xs text-slate-400">(${item.comPerc}%)</span>
+                    </td>
+                    <td class="p-3 text-center"><button onclick="removeRow(${index}, qbrData.projetos, renderProject)" class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
             });
             document.getElementById('totalTcvView').innerText = `${curr} ${sumTcv.toLocaleString('en-US', {minimumFractionDigits:2})}`;
             document.getElementById('totalComView').innerText = `${curr} ${sumCom.toLocaleString('en-US', {minimumFractionDigits:2})}`;
@@ -385,8 +439,8 @@
             qbrData.targets.forEach(t => { csvContent += `"${t.client}","${t.action}","${t.status}","${t.obs}"\n`; });
             csvContent += "\n";
 
-            csvContent += "3. PIPELINE DE COLOCATION E SERVICOS\nCliente,Contrato(M),Racks,kVA Total,Setup,Moving,SmartHands,TCV,Comissao(%)\n";
-            qbrData.projetos.forEach(p => { csvContent += `"${p.client}",${p.term},${p.racks},${p.totalKva},${p.setup},${p.moving},${p.smartHands},${p.tcv},${p.comPerc}\n`; });
+            csvContent += "3. PIPELINE DE COLOCATION E SERVICOS\nCliente,Data Centers,Contrato(M),Racks,kVA Total,Setup,Moving,SmartHands(Sim/Nao),TCV,Comissao(%)\n";
+            qbrData.projetos.forEach(p => { csvContent += `"${p.client}","${p.dcs}",${p.term},${p.racks},${p.totalKva},${p.setup},${p.moving},"${p.smartHands}",${p.tcv},${p.comPerc}\n`; });
             csvContent += "\n";
 
             csvContent += "4. TREINAMENTOS (NPP)\nCurso,Colaborador,Data,Status\n";
