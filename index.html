@@ -3,183 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextStream - Deal Registration Portal</title>
+    <title>NextStream - Joint Business Plan (JBP)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-50 font-sans text-slate-800">
+<body class="bg-slate-50 font-sans text-slate-800 pb-12">
 
-    <header class="bg-slate-900 text-white p-6 shadow-md">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <header class="bg-slate-900 text-white p-6 shadow-md border-b-4 border-green-500">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold border-l-4 border-green-500 pl-3">NextStream</h1>
-                <p class="text-sm text-slate-400 mt-1">Partner Deal Registration | <span class="text-green-400">Powered by IC²</span></p>
+                <h1 class="text-2xl font-bold">NextStream</h1>
+                <p class="text-sm text-slate-400 mt-1">Joint Business Plan (JBP) | Compromisso de Negócios</p>
             </div>
-            <div class="text-right hidden sm:block">
-                <p class="text-sm font-semibold text-teal-400"><i class="fas fa-leaf mr-1"></i> 100% Energia Renovável</p>
+            <div class="text-right">
+                <p class="text-sm font-semibold text-teal-400"><i class="fas fa-handshake mr-1"></i> Acordo é Acordo</p>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto p-6 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-            <h2 class="text-lg font-bold mb-4 text-slate-800 border-b pb-2">Registro de Oportunidade</h2>
+    <main class="max-w-5xl mx-auto mt-8">
+        <form id="jbpForm" class="space-y-8">
             
-            <form id="dealForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Nome do Integrador (Canal)</label>
-                    <input type="text" id="partnerName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Ex: Logicalis">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2"><i class="fas fa-building text-blue-500 mr-2"></i>1. Perfil do Integrador</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Nome do Canal</label>
+                        <input type="text" id="canalNome" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Classificação (Tier)</label>
+                        <select id="canalTier" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                            <option value="Tier 1 - Global">Tier 1 - Global / Hyperscaler</option>
+                            <option value="Tier 2 - Integrador">Tier 2 - Integrador (Ex: Kyndryl, Logicalis)</option>
+                            <option value="Tier 3 - Serviços">Tier 3 - Serviços Locais</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Account Manager (NextStream)</label>
+                        <input type="text" id="amName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Ex: Maribel Pachon">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Contato Principal (Canal)</label>
+                        <input type="text" id="contatoNome" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                    </div>
                 </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Tier do Parceiro</label>
-                    <select id="partnerTier" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                        <option value="Tier 1 - Global">Tier 1 - Global / Hyperscaler</option>
-                        <option value="Tier 2 - Integrador">Tier 2 - Integrador</option>
-                        <option value="Tier 3 - Serviços">Tier 3 - Serviços Locais</option>
-                    </select>
-                </div>
+            </div>
 
-                <div class="pt-4 border-t border-slate-100">
-                    <h3 class="text-sm font-semibold text-slate-600 mb-3">Dados do Cliente Final (Lead)</h3>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-orange-500">
+                <h2 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2"><i class="fas fa-tools text-orange-500 mr-2"></i>2. Capacidades Técnicas & Operacionais</h2>
+                <p class="text-sm text-slate-500 mb-4">Essencial para alinhamento com a arquitetura do IC² e projetos de alta densidade.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="capProjeto" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label class="ml-2 block text-sm text-slate-700">Departamento de Design/Projetos</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="capPreVenda" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label class="ml-2 block text-sm text-slate-700">Equipe de Pré-Venda Certificada</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="capInstalacao" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label class="ml-2 block text-sm text-slate-700">Mão de Obra de Instalação Própria</label>
+                    </div>
                 </div>
+            </div>
 
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-green-500">
+                <h2 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2"><i class="fas fa-chart-line text-green-500 mr-2"></i>3. Metas Financeiras (TCV Commit)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Vendas Ano Anterior (USD)</label>
+                        <input type="number" id="vendasAnteriores" value="0" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Cota Acordada Ano Atual (USD)</label>
+                        <input type="number" id="cotaAtual" required class="mt-1 block w-full rounded-md border-green-500 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 border bg-green-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Crescimento Projetado (%)</label>
+                        <input type="text" id="crescimento" readonly class="mt-1 block w-full rounded-md border-slate-300 bg-slate-100 shadow-sm sm:text-sm p-2 border text-slate-500 font-bold" placeholder="Calculado auto">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2"><i class="fas fa-bullseye text-blue-500 mr-2"></i>4. Foco de Mercado e Verticais</h2>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700">Nome do Cliente Final</label>
-                    <input type="text" id="clientName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Empresa XPTO">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Selecione as 3 principais verticais de foco para este ciclo:</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Financiero" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Financiero</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Gobierno" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Gobierno</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Centro de Datos" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Centro de Datos</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Educacion" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Educación</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Salud" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Salud (Hospitais)</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Manufactura" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Manufactura</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="Telecomunicaciones" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">Telecom</span></label>
+                        <label class="inline-flex items-center"><input type="checkbox" name="vertical" value="ESG/Renovables" class="form-checkbox text-blue-600"><span class="ml-2 text-sm">ESG/Sustentabilidade</span></label>
+                    </div>
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Data Estimada (Fechamento)</label>
-                    <input type="date" id="dealDate" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">TCV Estimado (USD)</label>
-                    <input type="number" id="dealValue" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="50000">
-                </div>
-
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
-                    <i class="fas fa-plus mr-2 mt-1"></i> Registrar Projeto
+            <div class="flex justify-end space-x-4">
+                <button type="button" class="py-2 px-4 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Limpar Formulário
                 </button>
-            </form>
-        </div>
-
-        <div class="lg:col-span-2 space-y-6">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
-                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Pipeline Total (TCV)</h3>
-                    <p id="totalPipeline" class="text-3xl font-bold text-slate-800 mt-2">$ 0</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-green-500">
-                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Projetos Registrados</h3>
-                    <p id="totalProjects" class="text-3xl font-bold text-green-600 mt-2">0</p>
-                </div>
+                <button type="submit" class="py-2 px-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">
+                    <i class="fas fa-file-signature mr-2"></i> Firmar Acordo & Exportar (CSV)
+                </button>
             </div>
-
-            <div class="bg-white rounded-lg shadow-sm border border-slate-200">
-                <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50 rounded-t-lg">
-                    <h3 class="text-lg font-bold text-slate-800">Oportunidades Protegidas</h3>
-                    <button onclick="exportToCSV()" class="text-sm bg-slate-800 text-white px-3 py-1.5 rounded hover:bg-slate-700 transition">
-                        <i class="fas fa-download mr-1"></i> Exportar Dados (CSV)
-                    </button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-slate-500">
-                        <thead class="text-xs text-slate-700 uppercase bg-white border-b">
-                            <tr>
-                                <th class="px-6 py-3">Canal</th>
-                                <th class="px-6 py-3">Cliente Final</th>
-                                <th class="px-6 py-3">Data Prevista</th>
-                                <th class="px-6 py-3">TCV (USD)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="projectsTableBody">
-                            <tr><td colspan="4" class="px-6 py-8 text-center text-slate-400">Nenhum projeto registrado. Preencha o formulário ao lado.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        </form>
     </main>
 
     <script>
-        // Memória local da aplicação
-        let projects = [];
+        // Cálculo automático de crescimento
+        const inputAnt = document.getElementById('vendasAnteriores');
+        const inputAtual = document.getElementById('cotaAtual');
+        const inputCresc = document.getElementById('crescimento');
 
-        // Captura o envio do formulário
-        document.getElementById('dealForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita o recarregamento da página
-
-            // Coleta os dados
-            const deal = {
-                partner: document.getElementById('partnerName').value,
-                tier: document.getElementById('partnerTier').value,
-                client: document.getElementById('clientName').value,
-                date: document.getElementById('dealDate').value,
-                value: parseFloat(document.getElementById('dealValue').value)
-            };
-
-            // Adiciona ao array
-            projects.push(deal);
-            
-            // Atualiza a tela e limpa os campos do cliente
-            updateDashboard();
-            document.getElementById('clientName').value = '';
-            document.getElementById('dealDate').value = '';
-            document.getElementById('dealValue').value = '';
-            
-            // Foca de volta no cliente para agilizar múltiplos cadastros
-            document.getElementById('clientName').focus();
-        });
-
-        // Atualiza a tabela e os totais
-        function updateDashboard() {
-            const tbody = document.getElementById('projectsTableBody');
-            let totalValue = 0;
-            
-            tbody.innerHTML = ''; // Limpa a tabela
-
-            projects.forEach(p => {
-                totalValue += p.value;
-                tbody.innerHTML += `
-                    <tr class="bg-white border-b hover:bg-slate-50 transition">
-                        <td class="px-6 py-4 font-medium text-slate-900">${p.partner} <span class="block text-xs text-slate-400">${p.tier}</span></td>
-                        <td class="px-6 py-4 font-semibold text-blue-600">${p.client}</td>
-                        <td class="px-6 py-4">${p.date}</td>
-                        <td class="px-6 py-4">$ ${p.value.toLocaleString('en-US')}</td>
-                    </tr>
-                `;
-            });
-
-            // Atualiza os KPIs
-            document.getElementById('totalPipeline').innerText = `$ ${totalValue.toLocaleString('en-US')}`;
-            document.getElementById('totalProjects').innerText = projects.length;
+        function calcularCrescimento() {
+            const ant = parseFloat(inputAnt.value) || 0;
+            const atual = parseFloat(inputAtual.value) || 0;
+            if (ant > 0) {
+                const perc = ((atual - ant) / ant) * 100;
+                inputCresc.value = perc.toFixed(1) + '%';
+                inputCresc.className = perc >= 0 
+                    ? "mt-1 block w-full rounded-md border-green-300 bg-green-50 shadow-sm sm:text-sm p-2 border text-green-700 font-bold"
+                    : "mt-1 block w-full rounded-md border-red-300 bg-red-50 shadow-sm sm:text-sm p-2 border text-red-700 font-bold";
+            } else {
+                inputCresc.value = 'N/A (Novo Parceiro)';
+            }
         }
 
-        // Gera e baixa o arquivo CSV para manter o controle com o Account Manager
-        function exportToCSV() {
-            if (projects.length === 0) {
-                alert("Não há dados para exportar.");
-                return;
-            }
+        inputAnt.addEventListener('input', calcularCrescimento);
+        inputAtual.addEventListener('input', calcularCrescimento);
 
-            // Cabeçalhos baseados na sua planilha original
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Nombre del canal,Classificación,Cliente final,Fecha,Valor TCV\n";
+        // Submissão e Exportação Segura
+        document.getElementById('jbpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-            projects.forEach(p => {
-                let row = `"${p.partner}","${p.tier}","${p.client}","${p.date}","${p.value}"`;
-                csvContent += row + "\n";
+            // Coleta Verticais
+            let verticais = [];
+            document.querySelectorAll('input[name="vertical"]:checked').forEach(cb => {
+                verticais.push(cb.value);
             });
 
-            // Cria o link de download invisível
+            const jbpData = {
+                Canal: document.getElementById('canalNome').value,
+                Tier: document.getElementById('canalTier').value,
+                AccountManager: document.getElementById('amName').value,
+                Contato: document.getElementById('contatoNome').value,
+                Cap_Projeto: document.getElementById('capProjeto').checked ? 'Sim' : 'Não',
+                Cap_PreVenda: document.getElementById('capPreVenda').checked ? 'Sim' : 'Não',
+                Cap_Instalacao: document.getElementById('capInstalacao').checked ? 'Sim' : 'Não',
+                VendasAnoAnterior: document.getElementById('vendasAnteriores').value,
+                CotaAcordada: document.getElementById('cotaAtual').value,
+                Crescimento: document.getElementById('crescimento').value,
+                VerticaisFoco: verticais.join('; ')
+            };
+
+            exportarJBPParaCSV(jbpData);
+        });
+
+        function exportarJBPParaCSV(data) {
+            const cabecalhos = Object.keys(data).join(',');
+            const valores = Object.values(data).map(v => `"${v}"`).join(',');
+            
+            const csvContent = "data:text/csv;charset=utf-8," + cabecalhos + "\n" + valores;
+            
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `Deal_Registration_NextStream_${new Date().toISOString().split('T')[0]}.csv`);
+            link.setAttribute("download", `JBP_Acordo_${data.Canal.replace(/\s+/g, '_')}_2026.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
