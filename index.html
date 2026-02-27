@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextStream - Portal do Integrador (NPP)</title>
+    <title>NextStream - Deal Registration Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-slate-50 font-sans text-slate-800">
@@ -14,58 +13,92 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold border-l-4 border-green-500 pl-3">NextStream</h1>
-                <p class="text-sm text-slate-400 mt-1">Alliance Partner Portal | <span class="text-green-400">Powered by IC²</span></p>
+                <p class="text-sm text-slate-400 mt-1">Partner Deal Registration | <span class="text-green-400">Powered by IC²</span></p>
             </div>
-            <div class="text-right">
-                <p class="text-sm font-semibold">Deal Registration & TCV Tracking</p>
+            <div class="text-right hidden sm:block">
+                <p class="text-sm font-semibold text-teal-400"><i class="fas fa-leaf mr-1"></i> 100% Energia Renovável</p>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto p-6 mt-6">
+    <main class="max-w-7xl mx-auto p-6 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <div id="upload-section" class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 mb-8">
-            <h2 class="text-lg font-bold mb-4 text-slate-700"><i class="fas fa-file-csv mr-2 text-blue-500"></i>Atualização de Dados (CSV)</h2>
-            <p class="text-sm text-slate-500 mb-4">Carregue o arquivo "Plan - Integrador.xlsx - Plan.csv" para visualizar o dashboard de performance.</p>
-            <input type="file" id="csvFileInput" accept=".csv" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+        <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+            <h2 class="text-lg font-bold mb-4 text-slate-800 border-b pb-2">Registro de Oportunidade</h2>
+            
+            <form id="dealForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Nome do Integrador (Canal)</label>
+                    <input type="text" id="partnerName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Ex: Logicalis">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Tier do Parceiro</label>
+                    <select id="partnerTier" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <option value="Tier 1 - Global">Tier 1 - Global / Hyperscaler</option>
+                        <option value="Tier 2 - Integrador">Tier 2 - Integrador</option>
+                        <option value="Tier 3 - Serviços">Tier 3 - Serviços Locais</option>
+                    </select>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100">
+                    <h3 class="text-sm font-semibold text-slate-600 mb-3">Dados do Cliente Final (Lead)</h3>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Nome do Cliente Final</label>
+                    <input type="text" id="clientName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Empresa XPTO">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Data Estimada (Fechamento)</label>
+                    <input type="date" id="dealDate" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">TCV Estimado (USD)</label>
+                    <input type="number" id="dealValue" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="50000">
+                </div>
+
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
+                    <i class="fas fa-plus mr-2 mt-1"></i> Registrar Projeto
+                </button>
+            </form>
         </div>
 
-        <div id="dashboard" class="hidden">
+        <div class="lg:col-span-2 space-y-6">
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-t-4 border-t-blue-500">
-                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Parceiro</h3>
-                    <p id="partnerName" class="text-2xl font-bold mt-2">-</p>
-                    <p id="partnerTier" class="text-sm text-blue-600 font-semibold mt-1">-</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
+                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Pipeline Total (TCV)</h3>
+                    <p id="totalPipeline" class="text-3xl font-bold text-slate-800 mt-2">$ 0</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-t-4 border-t-green-500">
-                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Total Rebates Acumulados</h3>
-                    <p id="totalRebates" class="text-2xl font-bold text-green-600 mt-2">$0.00</p>
-                    <p class="text-xs text-slate-400 mt-1">Impacto direto na margem operacional</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-t-4 border-t-teal-500">
-                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Impacto ESG (Serena Energia)</h3>
-                    <p class="text-2xl font-bold text-teal-600 mt-2">100% Renovável</p>
-                    <p class="text-xs text-slate-400 mt-1">Escopo 3 zerado nos projetos listados</p>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-green-500">
+                    <h3 class="text-sm font-semibold text-slate-500 uppercase">Projetos Registrados</h3>
+                    <p id="totalProjects" class="text-3xl font-bold text-green-600 mt-2">0</p>
                 </div>
             </div>
 
             <div class="bg-white rounded-lg shadow-sm border border-slate-200">
-                <div class="p-6 border-b border-slate-200 flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-slate-800"><i class="fas fa-handshake mr-2 text-blue-500"></i>Projetos Especificados (Deal Registration)</h3>
-                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Proteção de Conta Ativa</span>
+                <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50 rounded-t-lg">
+                    <h3 class="text-lg font-bold text-slate-800">Oportunidades Protegidas</h3>
+                    <button onclick="exportToCSV()" class="text-sm bg-slate-800 text-white px-3 py-1.5 rounded hover:bg-slate-700 transition">
+                        <i class="fas fa-download mr-1"></i> Exportar Dados (CSV)
+                    </button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-slate-500">
-                        <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                        <thead class="text-xs text-slate-700 uppercase bg-white border-b">
                             <tr>
-                                <th scope="col" class="px-6 py-3">Cliente Final</th>
-                                <th scope="col" class="px-6 py-3">Data</th>
-                                <th scope="col" class="px-6 py-3">Valor (TCV Estimado)</th>
+                                <th class="px-6 py-3">Canal</th>
+                                <th class="px-6 py-3">Cliente Final</th>
+                                <th class="px-6 py-3">Data Prevista</th>
+                                <th class="px-6 py-3">TCV (USD)</th>
                             </tr>
                         </thead>
                         <tbody id="projectsTableBody">
-                            </tbody>
+                            <tr><td colspan="4" class="px-6 py-8 text-center text-slate-400">Nenhum projeto registrado. Preencha o formulário ao lado.</td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -73,91 +106,83 @@
     </main>
 
     <script>
-        document.getElementById('csvFileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+        // Memória local da aplicação
+        let projects = [];
 
-            Papa.parse(file, {
-                complete: function(results) {
-                    processCSVData(results.data);
-                }
-            });
+        // Captura o envio do formulário
+        document.getElementById('dealForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita o recarregamento da página
+
+            // Coleta os dados
+            const deal = {
+                partner: document.getElementById('partnerName').value,
+                tier: document.getElementById('partnerTier').value,
+                client: document.getElementById('clientName').value,
+                date: document.getElementById('dealDate').value,
+                value: parseFloat(document.getElementById('dealValue').value)
+            };
+
+            // Adiciona ao array
+            projects.push(deal);
+            
+            // Atualiza a tela e limpa os campos do cliente
+            updateDashboard();
+            document.getElementById('clientName').value = '';
+            document.getElementById('dealDate').value = '';
+            document.getElementById('dealValue').value = '';
+            
+            // Foca de volta no cliente para agilizar múltiplos cadastros
+            document.getElementById('clientName').focus();
         });
 
-        function processCSVData(data) {
-            // Lógica simples de varredura (Baseada na estrutura do arquivo 'Plan.csv' fornecido)
-            let partnerName = "Não identificado";
-            let partnerTier = "Não identificado";
-            let totalRebates = "0";
-            let projects = [];
-            
-            let isProjectSection = false;
-
-            for (let i = 0; i < data.length; i++) {
-                const row = data[i];
-                if (!row || row.length === 0) continue;
-
-                // Extrair Nome do Canal e Classificação
-                if (row[1] === "Nombre del canal") {
-                    partnerName = row[3] || "Integrador Parceiro";
-                    partnerTier = row[15] || "Tier Padrão"; 
-                }
-
-                // Extrair Total de Rebates
-                if (row[17] === "Total rebates:") {
-                    totalRebates = row[20] || "0";
-                }
-
-                // Detectar seção de Projetos Especificados (Deal Registration)
-                if (row[1] === "Proyectos especificados y instalados") {
-                    isProjectSection = true;
-                    continue; // Pular o cabeçalho principal
-                }
-
-                if (isProjectSection) {
-                    // Evitar ler linhas em branco ou seções subsequentes
-                    if (row[1] === "Cliente final" || row[1] === "") {
-                        if(row[1] === "" && row[2] === "") isProjectSection = false; // Fim da tabela
-                        continue;
-                    }
-                    
-                    // Se houver nome de cliente, registrar no array
-                    if (row[1] && row[1].trim() !== "") {
-                        projects.push({
-                            cliente: row[1],
-                            data: row[4] || "TBD",
-                            valor: row[10] || "Sob consulta"
-                        });
-                    }
-                }
-            }
-
-            // Atualizar UI
-            document.getElementById('partnerName').innerText = partnerName;
-            document.getElementById('partnerTier').innerText = partnerTier;
-            document.getElementById('totalRebates').innerText = `$ ${parseFloat(totalRebates).toLocaleString('en-US')}`;
-
-            // Preencher Tabela
+        // Atualiza a tabela e os totais
+        function updateDashboard() {
             const tbody = document.getElementById('projectsTableBody');
-            tbody.innerHTML = ''; // Limpar tabela
+            let totalValue = 0;
             
+            tbody.innerHTML = ''; // Limpa a tabela
+
+            projects.forEach(p => {
+                totalValue += p.value;
+                tbody.innerHTML += `
+                    <tr class="bg-white border-b hover:bg-slate-50 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">${p.partner} <span class="block text-xs text-slate-400">${p.tier}</span></td>
+                        <td class="px-6 py-4 font-semibold text-blue-600">${p.client}</td>
+                        <td class="px-6 py-4">${p.date}</td>
+                        <td class="px-6 py-4">$ ${p.value.toLocaleString('en-US')}</td>
+                    </tr>
+                `;
+            });
+
+            // Atualiza os KPIs
+            document.getElementById('totalPipeline').innerText = `$ ${totalValue.toLocaleString('en-US')}`;
+            document.getElementById('totalProjects').innerText = projects.length;
+        }
+
+        // Gera e baixa o arquivo CSV para manter o controle com o Account Manager
+        function exportToCSV() {
             if (projects.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" class="px-6 py-4 text-center text-slate-500">Nenhum projeto registrado neste ciclo.</td></tr>';
-            } else {
-                projects.forEach(p => {
-                    tbody.innerHTML += `
-                        <tr class="bg-white border-b hover:bg-slate-50">
-                            <td class="px-6 py-4 font-medium text-slate-900">${p.cliente}</td>
-                            <td class="px-6 py-4">${p.data}</td>
-                            <td class="px-6 py-4 font-semibold text-blue-600">${p.valor}</td>
-                        </tr>
-                    `;
-                });
+                alert("Não há dados para exportar.");
+                return;
             }
 
-            // Mostrar Dashboard
-            document.getElementById('upload-section').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
+            // Cabeçalhos baseados na sua planilha original
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Nombre del canal,Classificación,Cliente final,Fecha,Valor TCV\n";
+
+            projects.forEach(p => {
+                let row = `"${p.partner}","${p.tier}","${p.client}","${p.date}","${p.value}"`;
+                csvContent += row + "\n";
+            });
+
+            // Cria o link de download invisível
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Deal_Registration_NextStream_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
