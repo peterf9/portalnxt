@@ -3,196 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextStream - Colocation Deal Registration</title>
+    <title>NextStream - QBR & Joint Strategy Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 pb-12">
+<body class="bg-slate-100 font-sans text-slate-800 pb-12">
 
-    <header class="bg-slate-900 text-white p-6 shadow-md border-b-4 border-green-500">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <header class="bg-slate-900 text-white p-6 shadow-md border-b-4 border-green-500 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold">NextStream</h1>
-                <p class="text-sm text-slate-400 mt-1">Colocation Deal Registration | <span class="text-green-400">Powered by IC² & Serena Energia</span></p>
+                <h1 class="text-2xl font-bold">NextStream | <span class="text-blue-400 font-normal">Channel Strategy & QBR</span></h1>
+                <p class="text-sm text-slate-400 mt-1">Joint Business Plan - Monitoramento Contínuo</p>
             </div>
-            <div class="text-right hidden sm:block">
-                <p class="text-sm font-semibold text-teal-400"><i class="fas fa-leaf mr-1"></i> Escopo 3 Zerado</p>
+            <div class="flex space-x-4">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-semibold text-slate-300">Parceiro: <span id="headerPartnerName" class="text-white">A Definir</span></p>
+                    <p class="text-xs text-teal-400"><i class="fas fa-leaf mr-1"></i> Compliance ESG Ativo</p>
+                </div>
+                <button onclick="exportAllToCSV()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded text-sm font-bold shadow transition">
+                    <i class="fas fa-file-export mr-2"></i>Exportar QBR (CSV)
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto p-6 mt-6 grid grid-cols-1 xl:grid-cols-3 gap-8">
-        
-        <div class="xl:col-span-1 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-            <h2 class="text-lg font-bold mb-4 text-slate-800 border-b pb-2"><i class="fas fa-server text-blue-500 mr-2"></i>Especificação do Projeto</h2>
-            
-            <form id="dealForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Canal / Integrador</label>
-                    <input type="text" id="partnerName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Ex: Kyndryl">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Cliente Final (Conta)</label>
-                    <input type="text" id="clientName" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Empresa XPTO">
-                </div>
+    <main class="max-w-7xl mx-auto p-4 mt-4 space-y-6">
 
-                <div class="pt-4 border-t border-slate-100">
-                    <h3 class="text-sm font-semibold text-slate-600 mb-3"><i class="fas fa-bolt text-orange-400 mr-1"></i> Space & Power</h3>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700">Qtd. de Racks</label>
-                        <input type="number" id="qtdRacks" required min="1" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Ex: 4">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700">kVA por Rack</label>
-                        <input type="number" id="kvaRack" required min="1" max="20" step="0.5" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Max 20 kVA">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Tempo de Contrato</label>
-                    <select id="tempoContrato" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                        <option value="24">24 Meses (Mínimo Recomendado)</option>
-                        <option value="36">36 Meses</option>
-                        <option value="48">48 Meses</option>
-                        <option value="60">60 Meses (+ Max Rebate Tier 3)</option>
-                    </select>
-                </div>
-
-                <div class="pt-4 border-t border-slate-100">
-                    <h3 class="text-sm font-semibold text-slate-600 mb-3"><i class="fas fa-dollar-sign text-green-500 mr-1"></i> Financeiro</h3>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">TCV Estimado (Valor Total Contrato)</label>
-                    <input type="number" id="dealValue" required class="mt-1 block w-full rounded-md border-green-400 bg-green-50 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 border" placeholder="R$ / USD">
-                </div>
-
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 mt-4">
-                    <i class="fas fa-lock mr-2 mt-1"></i> Registrar Oportunidade
-                </button>
-            </form>
-        </div>
-
-        <div class="xl:col-span-2 space-y-6">
-            
+        <section class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold text-slate-800"><i class="fas fa-handshake text-blue-500 mr-2"></i>Contexto da Parceria</h2>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-orange-500">
-                    <h3 class="text-xs font-semibold text-slate-500 uppercase">Total Potência Registrada (Pipeline)</h3>
-                    <p id="totalKVA" class="text-2xl font-bold text-slate-800 mt-1">0 <span class="text-sm font-normal text-slate-500">kVA</span></p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
-                    <h3 class="text-xs font-semibold text-slate-500 uppercase">Total Racks (Space)</h3>
-                    <p id="totalRacksDashboard" class="text-2xl font-bold text-blue-600 mt-1">0</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-green-500">
-                    <h3 class="text-xs font-semibold text-slate-500 uppercase">TCV Total (Pipeline)</h3>
-                    <p id="totalTCV" class="text-2xl font-bold text-green-600 mt-1">$ 0</p>
-                </div>
+                <input type="text" id="partnerInput" placeholder="Nome do Integrador (Ex: Kyndryl)" class="w-full rounded-md border-slate-300 p-2 border text-sm" oninput="document.getElementById('headerPartnerName').innerText = this.value || 'A Definir'">
+                <input type="text" id="amInput" placeholder="Account Manager NextStream" class="w-full rounded-md border-slate-300 p-2 border text-sm">
+                <input type="date" id="qbrDate" class="w-full rounded-md border-slate-300 p-2 border text-sm" title="Data da Revisão">
             </div>
+        </section>
 
-            <div class="bg-white rounded-lg shadow-sm border border-slate-200">
-                <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50 rounded-t-lg">
-                    <h3 class="text-lg font-bold text-slate-800">Oportunidades de Colocation</h3>
-                    <button onclick="exportToCSV()" class="text-sm bg-slate-800 text-white px-3 py-1.5 rounded hover:bg-slate-700 transition">
-                        <i class="fas fa-download mr-1"></i> Exportar Pipeline (CSV)
-                    </button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-slate-500">
-                        <thead class="text-xs text-slate-700 uppercase bg-white border-b">
-                            <tr>
-                                <th class="px-4 py-3">Canal / Cliente</th>
-                                <th class="px-4 py-3 text-center">Racks</th>
-                                <th class="px-4 py-3 text-center">Densidade (kVA)</th>
-                                <th class="px-4 py-3 text-center">Meses</th>
-                                <th class="px-4 py-3 text-right">TCV</th>
-                            </tr>
-                        </thead>
-                        <tbody id="projectsTableBody">
-                            <tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">Nenhum projeto registrado.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <section class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-purple-500">
+            <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fas fa-bullseye text-purple-500 mr-2"></i>1. Objetivos Conjuntos (Estratégia)</h2>
+            
+            <form id="formObj" class="flex gap-2 mb-4">
+                <input type="text" id="objDesc" placeholder="Descrição do Objetivo" required class="flex-1 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="date" id="objDate" required class="w-36 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="text" id="objOwner" placeholder="Responsável" required class="w-48 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="text" id="objObs" placeholder="Observações" class="flex-1 rounded-md border-slate-300 p-2 border text-sm">
+                <button type="submit" class="bg-purple-100 text-purple-700 px-4 py-2 rounded hover:bg-purple-200 transition"><i class="fas fa-plus"></i></button>
+            </form>
+
+            <table class="w-full text-sm text-left text-slate-500">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                    <tr><th>Objetivo</th><th>Prazo</th><th>Responsável</th><th>Observações</th><th>Ação</th></tr>
+                </thead>
+                <tbody id="tableObj"></tbody>
+            </table>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
+            <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fas fa-crosshairs text-blue-500 mr-2"></i>2. Clientes Target (Go-to-Market)</h2>
+            
+            <form id="formTarget" class="flex gap-2 mb-4">
+                <input type="text" id="targetName" placeholder="Cliente Alvo" required class="w-1/4 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="text" id="targetAction" placeholder="Ação Mapeada (Ex: Evento no IC²)" required class="flex-1 rounded-md border-slate-300 p-2 border text-sm">
+                <select id="targetStatus" class="w-36 rounded-md border-slate-300 p-2 border text-sm">
+                    <option>Mapeamento</option><option>Contato Inicial</option><option>Reunião Agendada</option><option>Visita IC²</option>
+                </select>
+                <input type="text" id="targetObs" placeholder="Observações" class="flex-1 rounded-md border-slate-300 p-2 border text-sm">
+                <button type="submit" class="bg-blue-100 text-blue-700 px-4 py-2 rounded hover:bg-blue-200 transition"><i class="fas fa-plus"></i></button>
+            </form>
+
+            <table class="w-full text-sm text-left text-slate-500">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                    <tr><th>Cliente</th><th>Ação Mapeada</th><th>Status</th><th>Observações</th><th>Ação</th></tr>
+                </thead>
+                <tbody id="tableTarget"></tbody>
+            </table>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-orange-500">
+            <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fas fa-server text-orange-500 mr-2"></i>3. Projetos em Desenvolvimento (Pipeline Colocation)</h2>
+            
+            <form id="formProject" class="flex flex-wrap gap-2 mb-4">
+                <input type="text" id="projClient" placeholder="Cliente Final" required class="w-48 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="number" id="projRacks" placeholder="Racks" required class="w-24 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="number" id="projKva" placeholder="kVA/Rack" required class="w-24 rounded-md border-slate-300 p-2 border text-sm">
+                <select id="projStatus" class="w-36 rounded-md border-slate-300 p-2 border text-sm">
+                    <option>Qualificação</option><option>Proposta</option><option>Negociação</option><option>Fechado/Won</option>
+                </select>
+                <input type="text" id="projObs" placeholder="Próximo Passo / Obstáculo" class="flex-1 rounded-md border-slate-300 p-2 border text-sm">
+                <button type="submit" class="bg-orange-100 text-orange-700 px-4 py-2 rounded hover:bg-orange-200 transition"><i class="fas fa-plus"></i></button>
+            </form>
+
+            <table class="w-full text-sm text-left text-slate-500">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                    <tr><th>Cliente</th><th>Racks</th><th>kVA / Rack</th><th>Potência Total</th><th>Status</th><th>Próximo Passo</th><th>Ação</th></tr>
+                </thead>
+                <tbody id="tableProject"></tbody>
+            </table>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 border-l-4 border-l-green-500">
+            <h2 class="text-lg font-bold text-slate-800 mb-4"><i class="fas fa-graduation-cap text-green-500 mr-2"></i>4. Passaporte NextStream (Treinamentos NPP)</h2>
+            
+            <form id="formTrain" class="flex gap-2 mb-4">
+                <select id="trainName" class="w-1/4 rounded-md border-slate-300 p-2 border text-sm">
+                    <option>Certificação Comercial Básica</option>
+                    <option>Certificação Colocation Alta Densidade</option>
+                    <option>Workshop IC² & IA Preditiva</option>
+                    <option>Argumentação ESG (Serena Energia)</option>
+                </select>
+                <input type="text" id="trainPerson" placeholder="Nome do Colaborador (Canal)" required class="flex-1 rounded-md border-slate-300 p-2 border text-sm">
+                <input type="date" id="trainDate" required class="w-36 rounded-md border-slate-300 p-2 border text-sm">
+                <select id="trainStatus" class="w-36 rounded-md border-slate-300 p-2 border text-sm">
+                    <option>Agendado</option><option>Concluído</option><option>Pendente</option>
+                </select>
+                <button type="submit" class="bg-green-100 text-green-700 px-4 py-2 rounded hover:bg-green-200 transition"><i class="fas fa-plus"></i></button>
+            </form>
+
+            <table class="w-full text-sm text-left text-slate-500">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                    <tr><th>Treinamento</th><th>Colaborador</th><th>Data Prevista/Realizada</th><th>Status</th><th>Ação</th></tr>
+                </thead>
+                <tbody id="tableTrain"></tbody>
+            </table>
+        </section>
+
     </main>
 
     <script>
-        let deals = [];
+        // Memória de Dados Temporária
+        const qbrData = { objetivos: [], targets: [], projetos: [], treinamentos: [] };
 
-        document.getElementById('dealForm').addEventListener('submit', function(e) {
+        // Funções Genéricas de Inserção e Renderização
+        function addRow(e, formId, dataArray, dataObj, renderFunc) {
             e.preventDefault();
-
-            const racks = parseInt(document.getElementById('qtdRacks').value);
-            const kva = parseFloat(document.getElementById('kvaRack').value);
-
-            const deal = {
-                partner: document.getElementById('partnerName').value,
-                client: document.getElementById('clientName').value,
-                racks: racks,
-                kvaPerRack: kva,
-                totalKVA: racks * kva,
-                term: parseInt(document.getElementById('tempoContrato').value),
-                tcv: parseFloat(document.getElementById('dealValue').value)
-            };
-
-            deals.push(deal);
-            updateDashboard();
-            
-            // Limpa campos específicos da oportunidade
-            document.getElementById('clientName').value = '';
-            document.getElementById('qtdRacks').value = '';
-            document.getElementById('kvaRack').value = '';
-            document.getElementById('dealValue').value = '';
-            document.getElementById('clientName').focus();
-        });
-
-        function updateDashboard() {
-            const tbody = document.getElementById('projectsTableBody');
-            let sumKVA = 0;
-            let sumRacks = 0;
-            let sumTCV = 0;
-            
-            tbody.innerHTML = '';
-
-            deals.forEach(d => {
-                sumKVA += d.totalKVA;
-                sumRacks += d.racks;
-                sumTCV += d.tcv;
-
-                tbody.innerHTML += `
-                    <tr class="bg-white border-b hover:bg-slate-50 transition">
-                        <td class="px-4 py-3"><span class="font-bold text-slate-800">${d.client}</span><br><span class="text-xs text-slate-500">Via ${d.partner}</span></td>
-                        <td class="px-4 py-3 text-center font-semibold">${d.racks}</td>
-                        <td class="px-4 py-3 text-center text-orange-600 font-semibold">${d.kvaPerRack} <span class="text-xs">(${d.totalKVA} total)</span></td>
-                        <td class="px-4 py-3 text-center">${d.term}</td>
-                        <td class="px-4 py-3 text-right font-bold text-green-600">$ ${d.tcv.toLocaleString('en-US')}</td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById('totalKVA').innerHTML = `${sumKVA} <span class="text-sm font-normal text-slate-500">kVA</span>`;
-            document.getElementById('totalRacksDashboard').innerText = sumRacks;
-            document.getElementById('totalTCV').innerText = `$ ${sumTCV.toLocaleString('en-US')}`;
+            dataArray.push(dataObj);
+            document.getElementById(formId).reset();
+            renderFunc();
         }
 
-        function exportToCSV() {
-            if (deals.length === 0) return alert("Não há dados para exportar.");
+        function removeRow(index, dataArray, renderFunc) {
+            dataArray.splice(index, 1);
+            renderFunc();
+        }
 
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Canal,Cliente Final,Qtd Racks,kVA por Rack,Potencia Total (kVA),Meses de Contrato,TCV\n";
+        // 1. Objetivos
+        document.getElementById('formObj').addEventListener('submit', (e) => {
+            const obj = {
+                desc: document.getElementById('objDesc').value,
+                date: document.getElementById('objDate').value,
+                owner: document.getElementById('objOwner').value,
+                obs: document.getElementById('objObs').value
+            };
+            addRow(e, 'formObj', qbrData.objetivos, obj, renderObj);
+        });
 
-            deals.forEach(d => {
-                csvContent += `"${d.partner}","${d.client}",${d.racks},${d.kvaPerRack},${d.totalKVA},${d.term},${d.tcv}\n`;
+        function renderObj() {
+            const tbody = document.getElementById('tableObj');
+            tbody.innerHTML = '';
+            qbrData.objetivos.forEach((item, index) => {
+                tbody.innerHTML += `<tr class="border-b">
+                    <td class="py-2 font-medium">${item.desc}</td><td class="py-2">${item.date}</td>
+                    <td class="py-2"><span class="bg-slate-200 text-slate-700 px-2 py-1 rounded text-xs">${item.owner}</span></td>
+                    <td class="py-2">${item.obs}</td>
+                    <td class="py-2"><button onclick="removeRow(${index}, qbrData.objetivos, renderObj)" class="text-red-500 hover:text-red-700"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
             });
+        }
+
+        // 2. Target
+        document.getElementById('formTarget').addEventListener('submit', (e) => {
+            const obj = {
+                client: document.getElementById('targetName').value,
+                action: document.getElementById('targetAction').value,
+                status: document.getElementById('targetStatus').value,
+                obs: document.getElementById('targetObs').value
+            };
+            addRow(e, 'formTarget', qbrData.targets, obj, renderTarget);
+        });
+
+        function renderTarget() {
+            const tbody = document.getElementById('tableTarget');
+            tbody.innerHTML = '';
+            qbrData.targets.forEach((item, index) => {
+                tbody.innerHTML += `<tr class="border-b">
+                    <td class="py-2 font-bold">${item.client}</td><td class="py-2">${item.action}</td>
+                    <td class="py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">${item.status}</span></td>
+                    <td class="py-2">${item.obs}</td>
+                    <td class="py-2"><button onclick="removeRow(${index}, qbrData.targets, renderTarget)" class="text-red-500"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
+            });
+        }
+
+        // 3. Projetos
+        document.getElementById('formProject').addEventListener('submit', (e) => {
+            const racks = parseInt(document.getElementById('projRacks').value);
+            const kva = parseFloat(document.getElementById('projKva').value);
+            const obj = {
+                client: document.getElementById('projClient').value,
+                racks: racks, kva: kva, total: racks * kva,
+                status: document.getElementById('projStatus').value,
+                obs: document.getElementById('projObs').value
+            };
+            addRow(e, 'formProject', qbrData.projetos, obj, renderProject);
+        });
+
+        function renderProject() {
+            const tbody = document.getElementById('tableProject');
+            tbody.innerHTML = '';
+            qbrData.projetos.forEach((item, index) => {
+                tbody.innerHTML += `<tr class="border-b">
+                    <td class="py-2 font-bold">${item.client}</td><td class="py-2 text-center">${item.racks}</td>
+                    <td class="py-2 text-center text-orange-600 font-bold">${item.kva}</td>
+                    <td class="py-2 text-center font-bold">${item.total} kVA</td>
+                    <td class="py-2"><span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">${item.status}</span></td>
+                    <td class="py-2">${item.obs}</td>
+                    <td class="py-2"><button onclick="removeRow(${index}, qbrData.projetos, renderProject)" class="text-red-500"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
+            });
+        }
+
+        // 4. Treinamentos
+        document.getElementById('formTrain').addEventListener('submit', (e) => {
+            const obj = {
+                course: document.getElementById('trainName').value,
+                person: document.getElementById('trainPerson').value,
+                date: document.getElementById('trainDate').value,
+                status: document.getElementById('trainStatus').value
+            };
+            addRow(e, 'formTrain', qbrData.treinamentos, obj, renderTrain);
+        });
+
+        function renderTrain() {
+            const tbody = document.getElementById('tableTrain');
+            tbody.innerHTML = '';
+            qbrData.treinamentos.forEach((item, index) => {
+                let statusColor = item.status === 'Concluído' ? 'bg-green-100 text-green-800' : (item.status === 'Pendente' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800');
+                tbody.innerHTML += `<tr class="border-b">
+                    <td class="py-2 font-medium">${item.course}</td><td class="py-2">${item.person}</td><td class="py-2">${item.date}</td>
+                    <td class="py-2"><span class="${statusColor} px-2 py-1 rounded text-xs">${item.status}</span></td>
+                    <td class="py-2"><button onclick="removeRow(${index}, qbrData.treinamentos, renderTrain)" class="text-red-500"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
+            });
+        }
+
+        // Função Master de Exportação Segura (CSV Consolidado)
+        function exportAllToCSV() {
+            const partner = document.getElementById('partnerInput').value || 'Parceiro';
+            const date = document.getElementById('qbrDate').value || new Date().toISOString().split('T')[0];
+            
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += `NEXTSTREAM JOINT BUSINESS PLAN & QBR\nParceiro:,${partner}\nData:,${date}\n\n`;
+
+            // Sec 1
+            csvContent += "1. OBJETIVOS ESTRATEGICOS\nObjetivo,Prazo,Responsavel,Observacoes\n";
+            qbrData.objetivos.forEach(o => { csvContent += `"${o.desc}","${o.date}","${o.owner}","${o.obs}"\n`; });
+            csvContent += "\n";
+
+            // Sec 2
+            csvContent += "2. CLIENTES TARGET\nCliente,Acao Mapeada,Status,Observacoes\n";
+            qbrData.targets.forEach(t => { csvContent += `"${t.client}","${t.action}","${t.status}","${t.obs}"\n`; });
+            csvContent += "\n";
+
+            // Sec 3
+            csvContent += "3. PROJETOS EM DESENVOLVIMENTO\nCliente,Racks,kVA por Rack,Potencia Total (kVA),Status,Proximo Passo\n";
+            qbrData.projetos.forEach(p => { csvContent += `"${p.client}",${p.racks},${p.kva},${p.total},"${p.status}","${p.obs}"\n`; });
+            csvContent += "\n";
+
+            // Sec 4
+            csvContent += "4. TREINAMENTOS (NPP)\nCurso,Colaborador,Data,Status\n";
+            qbrData.treinamentos.forEach(t => { csvContent += `"${t.course}","${t.person}","${t.date}","${t.status}"\n`; });
 
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `Colocation_Pipeline_${new Date().toISOString().split('T')[0]}.csv`);
+            link.setAttribute("download", `QBR_${partner.replace(/\s+/g, '_')}_${date}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
